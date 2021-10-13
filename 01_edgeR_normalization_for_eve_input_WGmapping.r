@@ -1,7 +1,7 @@
 #PURPOSE: Normalize gene expression data, filter by fpkm, using EdgeR to generate data fr EVE input
 
 #change these to test different parameters
-min_rpkm<-1
+min_rpkm<-10
 min_samples<-8
 min_logFC<-0
 induced_cutoff<-2
@@ -342,8 +342,8 @@ write(LZ_induced, file=paste0("gene_list_LZinduced_edgeR_wholeGenome.ensemblOrth
 write(RS_induced, file=paste0("gene_list_RSinduced_edgeR_wholeGenome.ensemblOrthos.rpkm",min_rpkm,".txt"),append=FALSE)
 #FPKM_LZ_induced<-FPKM_LZ[LZ_induced,]
 #FPKM_RS_induced<-FPKM_RS[RS_induced,]
-FPKM_LZ_induced<-nonzero_LZ_fpkm_output[LZ_induced,]
-FPKM_RS_induced<-nonzero_RS_fpkm_output[RS_induced,]
+FPKM_LZ_induced<-nonzero_LZ_fpkm_output[which(rownames(nonzero_LZ_fpkm_output) %in% LZ_induced),]
+FPKM_RS_induced<-nonzero_RS_fpkm_output[which(rownames(nonzero_RS_fpkm_output) %in% RS_induced),]
 print("Here are the final dimensions for LZ and RS induced data tables:")
 print(dim(FPKM_LZ_induced))
 print(dim(FPKM_RS_induced))
