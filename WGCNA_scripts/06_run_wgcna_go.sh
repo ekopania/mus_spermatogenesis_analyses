@@ -2,8 +2,8 @@
 #PURPOSE: Run WGCNA
 #
 # Job name:
-#SBATCH --job-name=WGCNA
-#SBATCH --output=WGCNA-%j.log
+#SBATCH --job-name=WGCNA_GO
+#SBATCH --output=WGCNA_GO-%j.log
 #SBATCH --mail-type=ALL # Mail events (NONE, BEGIN, END, FAIL, ALL)
 ##SBATCH --mail-user=ekopania4@gmail.com # Where to send mail
 #SBATCH --cpus-per-task=1 # Number of cores per MPI rank (ie number of threads, I think)
@@ -21,25 +21,14 @@ source ~/software/anaconda/anaconda3/bin/activate
 conda activate r4
 
 #All data
-#signed
-Rscript 05_WGCNA.r all TRUE
-#unsigned - NOT RECOMMENDED
-#Rscript 05_WGCNA.r all FALSE
+Rscript 07_WGCNA_GO.r all
 
 #Cell types separate
-#signed
-#Rscript 05_WGCNA.r LZ TRUE
-#Rscript 05_WGCNA.r RS TRUE
-#unsigned
-#Rscript 05_WGCNA.r LZ FALSE
-#Rscript 05_WGCNA.r RS FALSE
+#Rscript 07_WGCNA_GO.r LZ
+#Rscript 07_WGCNA_GO.r RS
 
 #Cell types separate, induced
-#signed
-#Rscript 05_WGCNA.r LZind TRUE
-#Rscript 05_WGCNA.r RSind TRUE
-#unsigned
-#Rscript 05_WGCNA.r LZind FALSE
-#Rscript 05_WGCNA.r RSind FALSE
+#Rscript 07_WGCNA_GO.r LZind
+#Rscript 07_WGCNA_GO.r RSind
 
 echo "Done!"
