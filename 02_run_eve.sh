@@ -18,12 +18,12 @@
 #
 ## Command(s) to run:
 
-exp="/mnt/beegfs/ek112884/mus_expression_analysis/MULTI_MAP/EVE_EXPRESSION_INPUTS/eve_expression_input_RS_edgeR_wholeGenome.ensemblOrthos.rpkm1.txt"
+exp="/mnt/beegfs/ek112884/mus_expression_analysis/MULTI_MAP/EVE_EXPRESSION_INPUTS/eve_expression_input_LZ_edgeR_wholeGenome.ensemblOrthos.rpkm2.txt"
 indiv="/mnt/beegfs/ek112884/mus_expression_analysis/eve_nindiv_input_four_species.txt"
 tree="/mnt/beegfs/ek112884/mus_expression_analysis/eve_input_four_species.treefile"
 ngene=$(head -1 ${exp})
-run_name="RSexpressed_RPKM1"
-subdir="RPKM1/"
+run_name="LZexpressed_RPKM2"
+subdir="RPKM2/"
 
 echo "Running EVE command: /home/ek112884/software/EVE_release/EVEmodel -S -d ${exp} -i ${indiv} -t ${tree} -n ${ngene} -v 10 -f ${run_name} -p ${subdir}"
 
