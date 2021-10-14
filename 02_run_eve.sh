@@ -23,7 +23,7 @@ indiv="/mnt/beegfs/ek112884/mus_expression_analysis/eve_nindiv_input_four_specie
 tree="/mnt/beegfs/ek112884/mus_expression_analysis/eve_input_four_species.treefile"
 ngene=$(head -1 ${exp})
 run_name="RSexpressed_RPKM1"
-subdir="RPKM1"
+subdir="RPKM1/"
 
 echo "Running EVE command: /home/ek112884/software/EVE_release/EVEmodel -S -d ${exp} -i ${indiv} -t ${tree} -n ${ngene} -v 10 -f ${run_name} -p ${subdir}"
 

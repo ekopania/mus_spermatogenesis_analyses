@@ -1,7 +1,7 @@
 #PURPOSE: Normalize gene expression data, filter by fpkm, using EdgeR to generate data fr EVE input
 
 #change these to test different parameters
-min_rpkm<-10
+min_rpkm<-1
 min_samples<-8
 min_logFC<-0
 induced_cutoff<-2
@@ -110,6 +110,7 @@ fpkm_mus<-rpkm(myDGE[,which(myDGE$samples$group==c(3,4))],gene.length=as.numeric
 fpkm_spr<-rpkm(myDGE[,which(myDGE$samples$group==c(5,6))],gene.length=as.numeric(sprLengths[,1]))
 fpkm_pah<-rpkm(myDGE[,which(myDGE$samples$group==c(7,8))],gene.length=as.numeric(pahLengths[,1]))
 fpkm<-cbind(fpkm_dom,fpkm_mus,fpkm_spr,fpkm_pah)
+write.table(fpkm,paste0("fpkm_filtered_table.rpkm",min_rpkm,".txt"),quote=FALSE,sep="\t")
 
 print("Determining which genes are expressed in each species or cell type...")
 include<-c()
