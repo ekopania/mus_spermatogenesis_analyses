@@ -19,98 +19,118 @@
 ## Command(s) to run:
 map_path="/mnt/beegfs/ek112884/mus_expression_analysis/"
 annot_path="/mnt/beegfs/ek112884/mus_expression_analysis/ref/"
-out_path="/mnt/beegfs/ek112884/mus_expression_analysis/WHOLE_GENOME_NO_MULTIMAP/"
+mm_path="/mnt/beegfs/ek112884/mus_expression_analysis/MULTI_MAP/"
+mmf_path="/mnt/beegfs/ek112884/mus_expression_analysis/WHOLE_GENOME_MULTIMAP_FRACTIONAL/"
+nmm_path="/mnt/beegfs/ek112884/mus_expression_analysis/WHOLE_GENOME_NO_MULTIMAP/"
 
 #M.m.musculus
 #PWK
-#ls ${map_path}PPPP*tophat_out/accepted_hits.bam | while read file; do
-#	name=$(echo "${file}" | cut -d "/" -f 6 | cut -d "_" -f 1)
-#	echo "${name}"
-#	#WITH multi-mapping
-#	#featureCounts -T 4 -M -t exon -g gene_id -a ${annot_path}Mus_musculus_pwkphj.PWK_PhJ_v1.94.gtf.gz -o "${out_path}${name}_counts.txt" "${file}"
-#	#WITHOUT multi-mapping
-#	featureCounts -T 4 -t exon -g gene_id -a ${annot_path}Mus_musculus_pwkphj.PWK_PhJ_v1.94.gtf.gz -o "${out_path}${name}_counts.txt" "${file}"
-#done
-#
-##CZII
-#ls ${map_path}CCCC*tophat_out/accepted_hits.bam | while read file; do
-#        name=$(echo "${file}" | cut -d "/" -f 6 | cut -d "_" -f 1)
-#        echo "${name}"
-#        #WITH multi-mapping
-#	#featureCounts -T 4 -M -t exon -g gene_id -a ${annot_path}Mus_musculus_pwkphj.PWK_PhJ_v1.94.gtf.gz -o "${out_path}${name}_counts.txt" "${file}"
-#	#WITHOUT multi-mapping
-#	featureCounts -T 4 -t exon -g gene_id -a ${annot_path}Mus_musculus_pwkphj.PWK_PhJ_v1.94.gtf.gz -o "${out_path}${name}_counts.txt" "${file}"
-#done
-#
-##MBS
-#ls ${map_path}MBS*tophat_out/accepted_hits.bam | while read file; do
-#        name=$(echo "${file}" | cut -d "/" -f 6 | cut -d "_" -f 1)
-#        echo "${name}"
-#	#WITH multi-mapping
-#        #featureCounts -T 4 -M -t exon -g gene_id -a ${annot_path}Mus_musculus_pwkphj.PWK_PhJ_v1.94.gtf.gz -o "${out_path}${name}_counts.txt" "${file}"
-#	#WITHOUT multi-mapping
-#	featureCounts -T 4 -t exon -g gene_id -a ${annot_path}Mus_musculus_pwkphj.PWK_PhJ_v1.94.gtf.gz -o "${out_path}${name}_counts.txt" "${file}"
-#done
-#
-##M.m.domesticus
-##BIK
-#ls ${map_path}BIK*tophat_out/accepted_hits.bam | while read file; do
-#        name=$(echo "${file}" | cut -d "/" -f 6 | cut -d "_" -f 1)
-#        echo "${name}"
-#	#WITH multi-mapping
-#        #featureCounts -T 4 -M -t exon -g gene_id -a ${annot_path}Mus_musculus_wsbeij.WSB_EiJ_v1.94.gtf.gz -o "${out_path}${name}_counts.txt" "${file}"
-#	#WITHOUT multi-mapping
-#	featureCounts -T 4 -t exon -g gene_id -a ${annot_path}Mus_musculus_wsbeij.WSB_EiJ_v1.94.gtf.gz -o "${out_path}${name}_counts.txt" "${file}"
-#done
-#
-##DGA
-#ls ${map_path}DGA*tophat_out/accepted_hits.bam | while read file; do
-#        name=$(echo "${file}" | cut -d "/" -f 6 | cut -d "_" -f 1)
-#        echo "${name}"
-#	#WITH multi-mapping
-#        #featureCounts -T 4 -M -t exon -g gene_id -a ${annot_path}Mus_musculus_wsbeij.WSB_EiJ_v1.94.gtf.gz -o "${out_path}${name}_counts.txt" "${file}"
-#	#WITHOUT multi-mapping
-#	featureCounts -T 4 -t exon -g gene_id -a ${annot_path}Mus_musculus_wsbeij.WSB_EiJ_v1.94.gtf.gz -o "${out_path}${name}_counts.txt" "${file}"
-#done
-#
-##LEWES
-#ls ${map_path}LLLL*tophat_out/accepted_hits.bam | while read file; do
-#        name=$(echo "${file}" | cut -d "/" -f 6 | cut -d "_" -f 1)
-#        echo "${name}"
-#	#WITH multi-mapping
-#        #featureCounts -T 4 -M -t exon -g gene_id -a ${annot_path}Mus_musculus_wsbeij.WSB_EiJ_v1.94.gtf.gz -o "${out_path}${name}_counts.txt" "${file}"
-#	#WITHOUT multi-mapping
-#	featureCounts -T 4 -t exon -g gene_id -a ${annot_path}Mus_musculus_wsbeij.WSB_EiJ_v1.94.gtf.gz -o "${out_path}${name}_counts.txt" "${file}"
-#done
-#
-##WSB
-#ls ${map_path}WWWW*tophat_out/accepted_hits.bam | while read file; do
-#        name=$(echo "${file}" | cut -d "/" -f 6 | cut -d "_" -f 1)
-#        echo "${name}"
-#	#WITH multi-mapping
-#        #featureCounts -T 4 -M -t exon -g gene_id -a ${annot_path}Mus_musculus_wsbeij.WSB_EiJ_v1.94.gtf.gz -o "${out_path}${name}_counts.txt" "${file}"
-#	#WITHOUT multi-mapping
-#	featureCounts -T 4 -t exon -g gene_id -a ${annot_path}Mus_musculus_wsbeij.WSB_EiJ_v1.94.gtf.gz -o "${out_path}${name}_counts.txt" "${file}"
-#done
-#
-##M.spretus
-#ls ${map_path}S*tophat_out/accepted_hits.bam | while read file; do
-#        name=$(echo "${file}" | cut -d "/" -f 6 | cut -d "_" -f 1)
-#        echo "${name}"
-#	#WITH multi-mapping
-#        #featureCounts -T 4 -M -t exon -g gene_id -a ${annot_path}Mus_spretus.SPRET_EiJ_v1.94.gtf.gz -o "${out_path}${name}_counts.txt" "${file}"
-#	#WITHOUT multi-mapping
-#	featureCounts -T 4 -t exon -g gene_id -a ${annot_path}Mus_spretus.SPRET_EiJ_v1.94.gtf.gz -o "${out_path}${name}_counts.txt" "${file}"
-#done
+ls ${map_path}PPPP*tophat_out/accepted_hits.bam | while read file; do
+	name=$(echo "${file}" | cut -d "/" -f 6 | cut -d "_" -f 1)
+	echo "${name}"
+	#WITH multi-mapping - each mapping is 1 such that an individual read can be counted multiple times
+	#featureCounts -T 4 -M -t exon -g gene_id -a ${annot_path}Mus_musculus_pwkphj.PWK_PhJ_v1.94.gtf.gz -o "${mm_path}${name}_counts.txt" "${file}"
+	#WITH multi-mapping AND fractional - read that maps x times will be counted 1/x times to each mapping, such that multiply mapping reads are still counted as 1 read but distributed evenly among all the features they map to
+	featureCounts -T 4 -M --fraction -t exon -g gene_id -a ${annot_path}Mus_musculus_pwkphj.PWK_PhJ_v1.94.gtf.gz -o "${mmf_path}${name}_counts.txt" "${file}"
+	#WITHOUT multi-mapping
+	#featureCounts -T 4 -t exon -g gene_id -a ${annot_path}Mus_musculus_pwkphj.PWK_PhJ_v1.94.gtf.gz -o "${nmm_path}${name}_counts.txt" "${file}"
+done
+
+#CZII
+ls ${map_path}CCCC*tophat_out/accepted_hits.bam | while read file; do
+        name=$(echo "${file}" | cut -d "/" -f 6 | cut -d "_" -f 1)
+        echo "${name}"
+        #WITH multi-mapping
+	#featureCounts -T 4 -M -t exon -g gene_id -a ${annot_path}Mus_musculus_pwkphj.PWK_PhJ_v1.94.gtf.gz -o "${mm_path}${name}_counts.txt" "${file}"
+	#WITH multi-mapping AND fractional - read that maps x times will be counted 1/x times to each mapping, such that multiply mapping reads are still counted as 1 read but distributed evenly among all the features they map to
+	featureCounts -T 4 -M --fraction -t exon -g gene_id -a ${annot_path}Mus_musculus_pwkphj.PWK_PhJ_v1.94.gtf.gz -o "${mmf_path}${name}_counts.txt" "${file}"
+	#WITHOUT multi-mapping
+	#featureCounts -T 4 -t exon -g gene_id -a ${annot_path}Mus_musculus_pwkphj.PWK_PhJ_v1.94.gtf.gz -o "${nmm_path}${name}_counts.txt" "${file}"
+done
+
+#MBS
+ls ${map_path}MBS*tophat_out/accepted_hits.bam | while read file; do
+        name=$(echo "${file}" | cut -d "/" -f 6 | cut -d "_" -f 1)
+        echo "${name}"
+	#WITH multi-mapping
+        #featureCounts -T 4 -M -t exon -g gene_id -a ${annot_path}Mus_musculus_pwkphj.PWK_PhJ_v1.94.gtf.gz -o "${mm_path}${name}_counts.txt" "${file}"
+	#WITH multi-mapping AND fractional - read that maps x times will be counted 1/x times to each mapping, such that multiply mapping reads are still counted as 1 read but distributed evenly among all the features they map to
+	featureCounts -T 4 -M --fraction -t exon -g gene_id -a ${annot_path}Mus_musculus_pwkphj.PWK_PhJ_v1.94.gtf.gz -o "${mmf_path}${name}_counts.txt" "${file}"
+	#WITHOUT multi-mapping
+	#featureCounts -T 4 -t exon -g gene_id -a ${annot_path}Mus_musculus_pwkphj.PWK_PhJ_v1.94.gtf.gz -o "${nmm_path}${name}_counts.txt" "${file}"
+done
+
+#M.m.domesticus
+#BIK
+ls ${map_path}BIK*tophat_out/accepted_hits.bam | while read file; do
+        name=$(echo "${file}" | cut -d "/" -f 6 | cut -d "_" -f 1)
+        echo "${name}"
+	#WITH multi-mapping
+        #featureCounts -T 4 -M -t exon -g gene_id -a ${annot_path}Mus_musculus_wsbeij.WSB_EiJ_v1.94.gtf.gz -o "${mm_path}${name}_counts.txt" "${file}"
+	#WITH multi-mapping AND fractional - read that maps x times will be counted 1/x times to each mapping, such that multiply mapping reads are still counted as 1 read but distributed evenly among all the features they map to
+	featureCounts -T 4 -M --fraction -t exon -g gene_id -a ${annot_path}Mus_musculus_wsbeij.WSB_EiJ_v1.94.gtf.gz -o "${mmf_path}${name}_counts.txt" "${file}"
+	#WITHOUT multi-mapping
+	#featureCounts -T 4 -t exon -g gene_id -a ${annot_path}Mus_musculus_wsbeij.WSB_EiJ_v1.94.gtf.gz -o "${nmm_path}${name}_counts.txt" "${file}"
+done
+
+#DGA
+ls ${map_path}DGA*tophat_out/accepted_hits.bam | while read file; do
+        name=$(echo "${file}" | cut -d "/" -f 6 | cut -d "_" -f 1)
+        echo "${name}"
+	#WITH multi-mapping
+        #featureCounts -T 4 -M -t exon -g gene_id -a ${annot_path}Mus_musculus_wsbeij.WSB_EiJ_v1.94.gtf.gz -o "${mm_path}${name}_counts.txt" "${file}"
+	#WITH multi-mapping AND fractional - read that maps x times will be counted 1/x times to each mapping, such that multiply mapping reads are still counted as 1 read but distributed evenly among all the features they map to
+	featureCounts -T 4 -M --fraction -t exon -g gene_id -a ${annot_path}Mus_musculus_wsbeij.WSB_EiJ_v1.94.gtf.gz -o "${mmf_path}${name}_counts.txt" "${file}"
+	#WITHOUT multi-mapping
+	#featureCounts -T 4 -t exon -g gene_id -a ${annot_path}Mus_musculus_wsbeij.WSB_EiJ_v1.94.gtf.gz -o "${nmm_path}${name}_counts.txt" "${file}"
+done
+
+#LEWES
+ls ${map_path}LLLL*tophat_out/accepted_hits.bam | while read file; do
+        name=$(echo "${file}" | cut -d "/" -f 6 | cut -d "_" -f 1)
+        echo "${name}"
+	#WITH multi-mapping
+        #featureCounts -T 4 -M -t exon -g gene_id -a ${annot_path}Mus_musculus_wsbeij.WSB_EiJ_v1.94.gtf.gz -o "${mm_path}${name}_counts.txt" "${file}"
+	#WITH multi-mapping AND fractional - read that maps x times will be counted 1/x times to each mapping, such that multiply mapping reads are still counted as 1 read but distributed evenly among all the features they map to
+	featureCounts -T 4 -M --fraction -t exon -g gene_id -a ${annot_path}Mus_musculus_wsbeij.WSB_EiJ_v1.94.gtf.gz -o "${mmf_path}${name}_counts.txt" "${file}"
+	#WITHOUT multi-mapping
+	#featureCounts -T 4 -t exon -g gene_id -a ${annot_path}Mus_musculus_wsbeij.WSB_EiJ_v1.94.gtf.gz -o "${nmm_path}${name}_counts.txt" "${file}"
+done
+
+#WSB
+ls ${map_path}WWWW*tophat_out/accepted_hits.bam | while read file; do
+        name=$(echo "${file}" | cut -d "/" -f 6 | cut -d "_" -f 1)
+        echo "${name}"
+	#WITH multi-mapping
+        #featureCounts -T 4 -M -t exon -g gene_id -a ${annot_path}Mus_musculus_wsbeij.WSB_EiJ_v1.94.gtf.gz -o "${mm_path}${name}_counts.txt" "${file}"
+	#WITH multi-mapping AND fractional - read that maps x times will be counted 1/x times to each mapping, such that multiply mapping reads are still counted as 1 read but distributed evenly among all the features they map to
+	featureCounts -T 4 -M --fraction -t exon -g gene_id -a ${annot_path}Mus_musculus_wsbeij.WSB_EiJ_v1.94.gtf.gz -o "${mmf_path}${name}_counts.txt" "${file}"
+	#WITHOUT multi-mapping
+	#featureCounts -T 4 -t exon -g gene_id -a ${annot_path}Mus_musculus_wsbeij.WSB_EiJ_v1.94.gtf.gz -o "${nmm_path}${name}_counts.txt" "${file}"
+done
+
+#M.spretus
+ls ${map_path}S*tophat_out/accepted_hits.bam | while read file; do
+        name=$(echo "${file}" | cut -d "/" -f 6 | cut -d "_" -f 1)
+        echo "${name}"
+	#WITH multi-mapping
+        #featureCounts -T 4 -M -t exon -g gene_id -a ${annot_path}Mus_spretus.SPRET_EiJ_v1.94.gtf.gz -o "${mm_path}${name}_counts.txt" "${file}"
+	#WITH multi-mapping AND fractional - read that maps x times will be counted 1/x times to each mapping, such that multiply mapping reads are still counted as 1 read but distributed evenly among all the features they map to
+	featureCounts -T 4 -M --fraction -t exon -g gene_id -a ${annot_path}Mus_spretus.SPRET_EiJ_v1.94.gtf.gz -o "${mmf_path}${name}_counts.txt" "${file}"
+	#WITHOUT multi-mapping
+	#featureCounts -T 4 -t exon -g gene_id -a ${annot_path}Mus_spretus.SPRET_EiJ_v1.94.gtf.gz -o "${nmm_path}${name}_counts.txt" "${file}"
+done
 
 #M.pahari
 ls ${map_path}PAH*tophat_out/accepted_hits.bam | while read file; do
         name=$(echo "${file}" | cut -d "/" -f 6 | cut -d "_" -f 1)
         echo "${name}"
 	#WITH multi-mapping
-        #featureCounts -T 4 -M -t exon -g gene_id -a ${annot_path}Mus_pahari.PAHARI_EiJ_v1.94.gtf.gz -o "${out_path}${name}_counts.txt" "${file}"
+        #featureCounts -T 4 -M -t exon -g gene_id -a ${annot_path}Mus_pahari.PAHARI_EiJ_v1.94.gtf.gz -o "${mm_path}${name}_counts.txt" "${file}"
+	#WITH multi-mapping AND fractional - read that maps x times will be counted 1/x times to each mapping, such that multiply mapping reads are still counted as 1 read but distributed evenly among all the features they map to
+	featureCounts -T 4 -M --fraction -t exon -g gene_id -a ${annot_path}Mus_pahari.PAHARI_EiJ_v1.94.gtf.gz -o "${mmf_path}${name}_counts.txt" "${file}"
 	#WITHOUT multi-mapping
-	featureCounts -T 4 -t exon -g gene_id -a ${annot_path}Mus_pahari.PAHARI_EiJ_v1.94.gtf.gz -o "${out_path}${name}_counts.txt" "${file}"
+	#featureCounts -T 4 -t exon -g gene_id -a ${annot_path}Mus_pahari.PAHARI_EiJ_v1.94.gtf.gz -o "${nmm_path}${name}_counts.txt" "${file}"
 done
 
 echo "Done!"
