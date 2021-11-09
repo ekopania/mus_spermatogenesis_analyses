@@ -13,17 +13,22 @@
 ##SBATCH --mem=0 #Not sure if I should mess with these...
 # Partition:
 ## Since you want to run it on 72 cores, the partition good_cpu has nodes with 72 cores.
-#SBATCH --partition=good_lab_reincarnation
+#SBATCH --partition=good_lab_cpu
 ##SBATCH -w, --nodelist=compute-0-3 # run on a specific node
 #
 ## Command(s) to run:
 
-exp="/mnt/beegfs/ek112884/mus_expression_analysis/MULTI_MAP/EVE_EXPRESSION_INPUTS/eve_expression_input_LZ_edgeR_wholeGenome.ensemblOrthos.rpkm2.txt"
+#Multimap, each read counted every time it maps (featurecounts -M)
+#exp="/mnt/beegfs/ek112884/mus_expression_analysis/MULTI_MAP/EVE_EXPRESSION_INPUTS/eve_expression_input_LZ_edgeR_wholeGenome.ensemblOrthos.rpkm2.txt"
+#Multimap fractional
+exp="/mnt/beegfs/ek112884/mus_expression_analysis/WHOLE_GENOME_MULTIMAP_FRACTIONAL/EVE_EXPRESSION_INPUTS/eve_expression_input_RS_edgeR_wholeGenome.ensemblOrthos.rpkm1.txt"
+#No multimapping
+#exp="/mnt/beegfs/ek112884/mus_expression_analysis/WHOLE_GENOME_NO_MULTIMAP/EVE_EXPRESSION_INPUTS/eve_expression_input_RS_edgeR_wholeGenome.ensemblOrthos.rpkm1.txt"
 indiv="/mnt/beegfs/ek112884/mus_expression_analysis/eve_nindiv_input_four_species.txt"
 tree="/mnt/beegfs/ek112884/mus_expression_analysis/eve_input_four_species.treefile"
 ngene=$(head -1 ${exp})
-run_name="LZexpressed_RPKM2"
-subdir="RPKM2/"
+run_name="RSexpressed_RPKM1"
+subdir="RPKM1/"
 
 echo "Running EVE command: /home/ek112884/software/EVE_release/EVEmodel -S -d ${exp} -i ${indiv} -t ${tree} -n ${ngene} -v 10 -f ${run_name} -p ${subdir}"
 

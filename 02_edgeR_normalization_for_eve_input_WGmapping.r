@@ -1,5 +1,7 @@
 #PURPOSE: Normalize gene expression data, filter by fpkm, using EdgeR to generate data fr EVE input
 
+#NOTE: Run this from the directory containing the count files you want to input into EdgeR
+
 #change these to test different parameters
 min_rpkm<-1
 min_samples<-8

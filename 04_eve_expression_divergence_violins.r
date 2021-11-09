@@ -1,33 +1,34 @@
 #PURPOSE: make expression divergence violin plots as in 02 BUT use EVEmodel beta-i parameter instead of pairwise divergence calculation; EVE beta-i should be a measure of population variation/evolutioanry divergence controlling for phylogeny (instead of pairwise comparison)
 
 library(ggplot2)
-library(EnsDb.Mmusculus.v75)
+library(EnsDb.Mmusculus.v79)
 
 rpkm<-1
+myDir<-"WHOLE_GENOME_MULTIMAP_FRACTIONAL"
 induced<-FALSE
-testis_spec<-TRUE
+testis_spec<-FALSE
 
 #Read in data
 print("Reading in files...")
 if(induced){
 	#INDUCED ONLY
-	mydata<-read.table("results/indivBetaMLparams_ensemblOrthos_BOTHinduced.res")
+	mydata<-read.table(paste0("/mnt/beegfs/ek112884/mus_expression_analysis/",myDir,"/results/RPKM",rpkm,"/indivBetaMLparams_ensemblOrthos_BOTHinduced_RPKM",rpkm,".res"))
 	#sharedData<-read.table("results/sharedBetaMLparams_ensemblOrthos_BOTHinduced.res")
 	#LZinduced<-read.table("results/indivBetaMLparams_ensemblOrthos_LZinduced.res")
 	#RSinduced<-read.table("results/indivBetaMLparams_ensemblOrthos_RSinduced.res")
 	#print(head(LZinduced))
 	#print(head(RSinduced))
-	LZgenes<-scan("gene_list_LZinduced_edgeR_wholeGenome.ensemblOrthos.txt",what=character())
-	RSgenes<-scan("gene_list_RSinduced_edgeR_wholeGenome.ensemblOrthos.txt",what=character())
+	LZgenes<-scan(paste0("/mnt/beegfs/ek112884/mus_expression_analysis/",myDir,"/gene_list_LZinduced_edgeR_wholeGenome.ensemblOrthos.rpkm",rpkm,".txt"),what=character())
+	RSgenes<-scan(paste0("/mnt/beegfs/ek112884/mus_expression_analysis/",myDir,"/gene_list_RSinduced_edgeR_wholeGenome.ensemblOrthos.rpkm",rpkm,".txt"),what=character())
 	betai<-cbind(betai=0-log(mydata[,4]),group=c(rep("LZ",3375),rep("RS",2769)),gene=c(LZgenes,RSgenes))
 } else{
 	#ALL GENES
-	#mydataLZ<-read.table("results/indivBetaMLparams_ensemblOrthos_LZ.res")
-	#mydataRS<-read.table("results/indivBetaMLparams_ensemblOrthos_RS.res")
-	#mydata<-as.data.frame(rbind(mydataLZ,mydataRS))
-	mydata<-read.table("/mnt/beegfs/ek112884/mus_expression_analysis/MULTI_MAP/results/RPKM1/indivBetaMLparams_RSexpressed_RPKM1.res")
-	LZgenes<-scan("gene_list_eve_LZ_edgeR_wholeGenome.ensemblOrthos.txt",what=character())
-	RSgenes<-scan("gene_list_eve_RS_edgeR_wholeGenome.ensemblOrthos.txt",what=character())
+	mydataLZ<-read.table(paste0("/mnt/beegfs/ek112884/mus_expression_analysis/",myDir,"/results/RPKM",rpkm,"/indivBetaMLparamsLZexpressed_RPKM",rpkm,".res"))
+	mydataRS<-read.table(paste0("/mnt/beegfs/ek112884/mus_expression_analysis/",myDir,"/results/RPKM",rpkm,"/indivBetaMLparamsRSexpressed_RPKM",rpkm,".res"))
+	mydata<-as.data.frame(rbind(mydataLZ,mydataRS))
+	#mydata<-read.table(paste0("/mnt/beegfs/ek112884/mus_expression_analysis/",myDir,"/results/RPKM",rpkm,"/indivBetaMLparamsBOTHexpressed_RPKM",rpkm,".res"))
+	LZgenes<-scan(paste0("/mnt/beegfs/ek112884/mus_expression_analysis/",myDir,"/gene_list_eve_LZ_edgeR_wholeGenome.ensemblOrthos.rpkm",rpkm,".txt"),what=character())
+	RSgenes<-scan(paste0("/mnt/beegfs/ek112884/mus_expression_analysis/",myDir,"/gene_list_eve_RS_edgeR_wholeGenome.ensemblOrthos.rpkm",rpkm,".txt"),what=character())
 	betai<-cbind(betai=0-log(mydata[,4]),group=c(rep("LZ",nrow(mydataLZ)),rep("RS",nrow(mydataRS))),gene=c(LZgenes,RSgenes))
 }
 if(testis_spec){
@@ -104,7 +105,7 @@ wilcox.test(as.numeric(as.character(combo[which(combo$group=="LZ"),]$betai)),as.
 #wilcox.test(as.numeric(as.character(combo[which(combo$group=="LZ"),]$alpha)),as.numeric(as.character(combo[which(combo$group=="RS"),]$alpha)))#, alternative="less")
 
 #Repeat for X chr
-edb<-EnsDb.Mmusculus.v75
+edb<-EnsDb.Mmusculus.v79
 edb_y<-addFilter(edb, SeqNameFilter("Y"))
 y_genes<-genes(edb_y)
 edb_x<-addFilter(edb, SeqNameFilter("X"))
@@ -113,15 +114,19 @@ edb_auto<-addFilter(edb, SeqNameFilter(c(1:19)))
 auto_genes<-genes(edb_auto)
 
 #append gene names
-if(induced){
-	LZgenes<-scan("gene_list_LZinduced_edgeR_wholeGenome.ensemblOrthos.txt",what=character())
-	RSgenes<-scan("gene_list_RSinduced_edgeR_wholeGenome.ensemblOrthos.txt",what=character())
-} else if(testis_spec){
+#if(induced){
+#	LZgenes<-scan("gene_list_LZinduced_edgeR_wholeGenome.ensemblOrthos.txt",what=character())
+#	RSgenes<-scan("gene_list_RSinduced_edgeR_wholeGenome.ensemblOrthos.txt",what=character())
+#} else if(testis_spec){
+#	LZgenes<-as.character(combo$gene[which(combo$group=="LZ")])
+#	RSgenes<-as.character(combo$gene[which(combo$group=="RS")])
+#} else{
+#	LZgenes<-scan("gene_list_eve_LZ_edgeR_wholeGenome.ensemblOrthos.txt",what=character())
+#	RSgenes<-scan("gene_list_eve_RS_edgeR_wholeGenome.ensemblOrthos.txt",what=character())
+#}
+if(testis_spec){
 	LZgenes<-as.character(combo$gene[which(combo$group=="LZ")])
 	RSgenes<-as.character(combo$gene[which(combo$group=="RS")])
-} else{
-	LZgenes<-scan("gene_list_eve_LZ_edgeR_wholeGenome.ensemblOrthos.txt",what=character())
-	RSgenes<-scan("gene_list_eve_RS_edgeR_wholeGenome.ensemblOrthos.txt",what=character())
 }
 gene_names<-c(LZgenes,RSgenes)
 print(gene_names)
