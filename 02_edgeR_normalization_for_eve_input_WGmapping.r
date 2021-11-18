@@ -1,4 +1,4 @@
-#PURPOSE: Normalize gene expression data, filter by fpkm, using EdgeR to generate data fr EVE input
+#PURPOSE: Normalize gene expression data, filter by fpkm, using EdgeR to generate data for EVE input
 
 #NOTE: Run this from the directory containing the count files you want to input into EdgeR
 
@@ -6,7 +6,7 @@
 min_rpkm<-1
 min_samples<-8
 min_logFC<-0
-induced_cutoff<-2
+induced_cutoff<-10
 
 print("Loading EdgeR and setting up DGE object...")
 library(edgeR)
@@ -102,8 +102,11 @@ sprLengths<-ordered_fc_sprLengths[ordered_fc_sprLengths[,2] %in% rownames(myDGE$
 pahLengths<-ordered_fc_pahLengths[ordered_fc_pahLengths[,2] %in% rownames(myDGE$counts),]
 refLengths<-ordered_fc_refLengths[ordered_fc_refLengths[,2] %in% rownames(myDGE$counts),]
 
+colnames(myDGE$design)<-c("dom.LZ","dom.RS","mus.LZ","mus.RS","pah.LZ","pah.RS","spr.LZ","spr.RS")
+print(myDGE$design)
 for(i in colnames(myDGE$design)){
 	result<-rownames(myDGE$design)[which(myDGE$design[,i]==1)]
+	print(paste("samples",i,sep="."))
 	assign(paste("samples",i,sep="."),result)
 }
 #Calculate fpkm again for each group, with normalized myDGE and new set of genes
@@ -341,8 +344,8 @@ for(i in RS_induced){
         print(paste("ERROR: ", i, "cannot be induced in both LZ and RS"))
     }
 }
-write(LZ_induced, file=paste0("gene_list_LZinduced_edgeR_wholeGenome.ensemblOrthos.rpkm",min_rpkm,".txt"),append=FALSE)
-write(RS_induced, file=paste0("gene_list_RSinduced_edgeR_wholeGenome.ensemblOrthos.rpkm",min_rpkm,".txt"),append=FALSE)
+write(LZ_induced, file=paste0("INDUCED_CUTOFF",induced_cutoff,"/gene_list_LZinduced_edgeR_wholeGenome.ensemblOrthos.rpkm",min_rpkm,".txt"),append=FALSE)
+write(RS_induced, file=paste0("INDUCED_CUTOFF",induced_cutoff,"/gene_list_RSinduced_edgeR_wholeGenome.ensemblOrthos.rpkm",min_rpkm,".txt"),append=FALSE)
 #FPKM_LZ_induced<-FPKM_LZ[LZ_induced,]
 #FPKM_RS_induced<-FPKM_RS[RS_induced,]
 FPKM_LZ_induced<-nonzero_LZ_fpkm_output[which(rownames(nonzero_LZ_fpkm_output) %in% LZ_induced),]
@@ -350,9 +353,9 @@ FPKM_RS_induced<-nonzero_RS_fpkm_output[which(rownames(nonzero_RS_fpkm_output) %
 print("Here are the final dimensions for LZ and RS induced data tables:")
 print(dim(FPKM_LZ_induced))
 print(dim(FPKM_RS_induced))
-write(length(LZ_induced), file=paste0("eve_expression_input_LZinduced_edgeR_wholeGenome.ensemblOrthos.rpkm",min_rpkm,".txt"), append=FALSE, sep="\t")
-write.table(FPKM_LZ_induced, file=paste0("eve_expression_input_LZinduced_edgeR_wholeGenome.ensemblOrthos.rpkm",min_rpkm,".txt"), quote=FALSE, col.names=FALSE, append=TRUE, sep="\t")
-write(length(RS_induced), file=paste0("eve_expression_input_RSinduced_edgeR_wholeGenome.ensemblOrthos.rpkm",min_rpkm,".txt"), append=FALSE, sep="\t")
-write.table(FPKM_RS_induced, file=paste0("eve_expression_input_RSinduced_edgeR_wholeGenome.ensemblOrthos.rpkm",min_rpkm,".txt"), quote=FALSE, col.names=FALSE, append=TRUE, sep="\t")
+write(length(LZ_induced), file=paste0("INDUCED_CUTOFF",induced_cutoff,"/eve_expression_input_LZinduced_edgeR_wholeGenome.ensemblOrthos.rpkm",min_rpkm,".txt"), append=FALSE, sep="\t")
+write.table(FPKM_LZ_induced, file=paste0("INDUCED_CUTOFF",induced_cutoff,"/eve_expression_input_LZinduced_edgeR_wholeGenome.ensemblOrthos.rpkm",min_rpkm,".txt"), quote=FALSE, col.names=FALSE, append=TRUE, sep="\t")
+write(length(RS_induced), file=paste0("INDUCED_CUTOFF",induced_cutoff,"/eve_expression_input_RSinduced_edgeR_wholeGenome.ensemblOrthos.rpkm",min_rpkm,".txt"), append=FALSE, sep="\t")
+write.table(FPKM_RS_induced, file=paste0("INDUCED_CUTOFF",induced_cutoff,"/eve_expression_input_RSinduced_edgeR_wholeGenome.ensemblOrthos.rpkm",min_rpkm,".txt"), quote=FALSE, col.names=FALSE, append=TRUE, sep="\t")
 
 print("Done!")

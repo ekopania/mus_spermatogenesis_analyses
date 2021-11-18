@@ -20,12 +20,12 @@ allTraits<-read.table("/mnt/beegfs/ek112884/mus_expression_analysis/MULTI_MAP/WG
 if(dataset=="all"){
 	myTraits<-allTraits
 	stPower<-10
-#} else if(dataset=="LZ"){
-#	myTraits<-allTraits[grepl("LZ", rownames(allTraits)),]
-#	stPower<-
-#} else if(dataset=="RS"){
-#	myTraits<-allTraits[grepl("RS", rownames(allTraits)),]
-#        stPower<-
+} else if(dataset=="LZ"){
+	myTraits<-allTraits[grepl("LZ", rownames(allTraits)),]
+	stPower<-18
+} else if(dataset=="RS"){
+	myTraits<-allTraits[grepl("RS", rownames(allTraits)),]
+        stPower<-9
 #} else if(dataset=="LZind"){
 #	myTraits<-allTraits[grepl("LZ", rownames(allTraits)),]
 #	stPower<-

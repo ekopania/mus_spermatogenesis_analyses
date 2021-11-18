@@ -23,10 +23,10 @@ lnames<-c(lnames, load(file=paste("/mnt/beegfs/ek112884/mus_expression_analysis/
 allTraits<-read.table("/mnt/beegfs/ek112884/mus_expression_analysis/MULTI_MAP/WGCNA/traits.txt",header=TRUE)
 if(dataset=="all"){
         interesting_mods<-c("blue","turquoise","green","yellow","red","brown")
-#} else if(dataset=="LZ"){
-#        interesting_mods<-c()
-#} else if(dataset=="RS"){
-#        interesting_mods<-c("")
+} else if(dataset=="LZ"){
+        interesting_mods<-c("darkturquoise","grey60","salmon","brown","turquoise","tan","greenyellow","magenta","black","lightyellow","darkred","lightgreen","midnightblue","blue","pink","yellow","darkgreen","orange","royalblue","darkgrey","green","cyan","darkorange","lightcyan","purple","red")
+} else if(dataset=="RS"){
+        interesting_mods<-c("turquoise","black","magenta","midnightblue","red","cyan","greenyellow","lightcyan","yellow","green","tan","lightyellow","salmon","grey60","lightgreen","purple","blue","brown","pink")
 #} else if(dataset=="LZind"){
 #        interesting_mods<-c("")
 #} else if(dataset=="RSind"){

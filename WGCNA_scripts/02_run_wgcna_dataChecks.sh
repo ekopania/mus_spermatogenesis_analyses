@@ -21,14 +21,14 @@ source ~/software/anaconda/anaconda3/bin/activate
 conda activate r4
 
 #All data
-Rscript 03_WGCNA_dataChecks.r all
+#Rscript /mnt/beegfs/ek112884/mus_expression_analysis/MULTI_MAP/mus_spermatogenesis_analyses/WGCNA_scripts/03_WGCNA_dataChecks.r all
 
 #Cell types separate
-#Rscript 03_WGCNA_dataChecks.r LZ
-#Rscript 03_WGCNA_dataChecks.r RS
+#Rscript /mnt/beegfs/ek112884/mus_expression_analysis/MULTI_MAP/mus_spermatogenesis_analyses/WGCNA_scripts/03_WGCNA_dataChecks.r LZ
+Rscript /mnt/beegfs/ek112884/mus_expression_analysis/MULTI_MAP/mus_spermatogenesis_analyses/WGCNA_scripts/03_WGCNA_dataChecks.r RS
 
 #Cell types separate, induced only
-#Rscript 03_WGCNA_dataChecks.r LZind
-#Rscript 03_WGCNA_dataChecks.r RSind
+#Rscript /mnt/beegfs/ek112884/mus_expression_analysis/MULTI_MAP/mus_spermatogenesis_analyses/WGCNA_scripts/03_WGCNA_dataChecks.r LZind
+#Rscript /mnt/beegfs/ek112884/mus_expression_analysis/MULTI_MAP/mus_spermatogenesis_analyses/WGCNA_scripts/03_WGCNA_dataChecks.r RSind
 
 echo "Done!"

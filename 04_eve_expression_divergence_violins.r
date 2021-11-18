@@ -1,26 +1,25 @@
 #PURPOSE: make expression divergence violin plots as in 02 BUT use EVEmodel beta-i parameter instead of pairwise divergence calculation; EVE beta-i should be a measure of population variation/evolutioanry divergence controlling for phylogeny (instead of pairwise comparison)
 
 library(ggplot2)
-library(EnsDb.Mmusculus.v79)
+#library(EnsDb.Mmusculus.v79)
+suppressPackageStartupMessages(library(EnsDb.Mmusculus.v75))
 
 rpkm<-1
-myDir<-"WHOLE_GENOME_MULTIMAP_FRACTIONAL"
-induced<-FALSE
+myDir<-"MULTI_MAP"
+induced<-TRUE
+induced_cutoff<-2
 testis_spec<-FALSE
 
 #Read in data
 print("Reading in files...")
 if(induced){
 	#INDUCED ONLY
-	mydata<-read.table(paste0("/mnt/beegfs/ek112884/mus_expression_analysis/",myDir,"/results/RPKM",rpkm,"/indivBetaMLparams_ensemblOrthos_BOTHinduced_RPKM",rpkm,".res"))
-	#sharedData<-read.table("results/sharedBetaMLparams_ensemblOrthos_BOTHinduced.res")
-	#LZinduced<-read.table("results/indivBetaMLparams_ensemblOrthos_LZinduced.res")
-	#RSinduced<-read.table("results/indivBetaMLparams_ensemblOrthos_RSinduced.res")
-	#print(head(LZinduced))
-	#print(head(RSinduced))
-	LZgenes<-scan(paste0("/mnt/beegfs/ek112884/mus_expression_analysis/",myDir,"/gene_list_LZinduced_edgeR_wholeGenome.ensemblOrthos.rpkm",rpkm,".txt"),what=character())
-	RSgenes<-scan(paste0("/mnt/beegfs/ek112884/mus_expression_analysis/",myDir,"/gene_list_RSinduced_edgeR_wholeGenome.ensemblOrthos.rpkm",rpkm,".txt"),what=character())
-	betai<-cbind(betai=0-log(mydata[,4]),group=c(rep("LZ",3375),rep("RS",2769)),gene=c(LZgenes,RSgenes))
+	mydataLZ<-read.table(paste0("/mnt/beegfs/ek112884/mus_expression_analysis/",myDir,"/results/RPKM",rpkm,"_INDUCED",induced_cutoff,"/indivBetaMLparamsLZinduced",induced_cutoff,"_RPKM",rpkm,".res"))
+	mydataRS<-read.table(paste0("/mnt/beegfs/ek112884/mus_expression_analysis/",myDir,"/results/RPKM",rpkm,"_INDUCED",induced_cutoff,"/indivBetaMLparamsRSinduced",induced_cutoff,"_RPKM",rpkm,".res"))
+	mydata<-as.data.frame(rbind(mydataLZ,mydataRS))
+	LZgenes<-scan(paste0("/mnt/beegfs/ek112884/mus_expression_analysis/",myDir,"/INDUCED_CUTOFF",induced_cutoff,"/gene_list_LZinduced_edgeR_wholeGenome.ensemblOrthos.rpkm",rpkm,".txt"),what=character())
+	RSgenes<-scan(paste0("/mnt/beegfs/ek112884/mus_expression_analysis/",myDir,"/INDUCED_CUTOFF",induced_cutoff,"/gene_list_RSinduced_edgeR_wholeGenome.ensemblOrthos.rpkm",rpkm,".txt"),what=character())
+	betai<-cbind(betai=0-log(mydata[,4]),group=c(rep("LZ",nrow(mydataLZ)),rep("RS",nrow(mydataRS))),gene=c(LZgenes,RSgenes))
 } else{
 	#ALL GENES
 	mydataLZ<-read.table(paste0("/mnt/beegfs/ek112884/mus_expression_analysis/",myDir,"/results/RPKM",rpkm,"/indivBetaMLparamsLZexpressed_RPKM",rpkm,".res"))
@@ -105,7 +104,8 @@ wilcox.test(as.numeric(as.character(combo[which(combo$group=="LZ"),]$betai)),as.
 #wilcox.test(as.numeric(as.character(combo[which(combo$group=="LZ"),]$alpha)),as.numeric(as.character(combo[which(combo$group=="RS"),]$alpha)))#, alternative="less")
 
 #Repeat for X chr
-edb<-EnsDb.Mmusculus.v79
+#edb<-EnsDb.Mmusculus.v79
+edb<-EnsDb.Mmusculus.v75
 edb_y<-addFilter(edb, SeqNameFilter("Y"))
 y_genes<-genes(edb_y)
 edb_x<-addFilter(edb, SeqNameFilter("X"))

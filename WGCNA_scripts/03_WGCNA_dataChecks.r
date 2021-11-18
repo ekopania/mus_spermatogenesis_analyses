@@ -13,7 +13,12 @@ enableWGCNAThreads(nThreads=8)
 
 print("Reading in expression data...")
 #t() so genes are columns and samples are rows
-expData<-t(read.table("/mnt/beegfs/ek112884/mus_expression_analysis/MULTI_MAP/WGCNA/logTransformed_expData.txt", header=TRUE)) #t() so genes are columns and samples are rows
+expData<-t(read.table("/mnt/beegfs/ek112884/mus_expression_analysis/MULTI_MAP/WGCNA/logTransformed_expData.txt", header=TRUE))
+#if(dataset=="all"){
+#	expData<-t(read.table("/mnt/beegfs/ek112884/mus_expression_analysis/MULTI_MAP/WGCNA/logTransformed_expData.txt", header=TRUE)) 
+#} else{
+#	expData<-t(read.table(paste("/mnt/beegfs/ek112884/mus_expression_analysis/MULTI_MAP/WGCNA/logTransformed_expData",dataset,"txt", sep="."), header=TRUE))
+#}
 print(dim(expData))
 print("Checking to make sure all genes good...")
 gsg = goodSamplesGenes(expData, verbose = 3)

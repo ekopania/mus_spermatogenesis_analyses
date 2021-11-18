@@ -18,6 +18,6 @@
 #
 ## Command(s) to run:
 
-Rscript 01_process_exp_data.r
+Rscript /mnt/beegfs/ek112884/mus_expression_analysis/MULTI_MAP/mus_spermatogenesis_analyses/WGCNA_scripts/01_process_exp_data.r
 
 echo "Done!"

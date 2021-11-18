@@ -21,11 +21,11 @@ source ~/software/anaconda/anaconda3/bin/activate
 conda activate r4
 
 #All data
-Rscript 07_WGCNA_GO.r all
+#Rscript /mnt/beegfs/ek112884/mus_expression_analysis/MULTI_MAP/mus_spermatogenesis_analyses/WGCNA_scripts/07_WGCNA_GO.r all
 
 #Cell types separate
-#Rscript 07_WGCNA_GO.r LZ
-#Rscript 07_WGCNA_GO.r RS
+#Rscript /mnt/beegfs/ek112884/mus_expression_analysis/MULTI_MAP/mus_spermatogenesis_analyses/WGCNA_scripts/07_WGCNA_GO.r LZ
+Rscript /mnt/beegfs/ek112884/mus_expression_analysis/MULTI_MAP/mus_spermatogenesis_analyses/WGCNA_scripts/07_WGCNA_GO.r RS
 
 #Cell types separate, induced
 #Rscript 07_WGCNA_GO.r LZind

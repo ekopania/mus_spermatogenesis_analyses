@@ -22,14 +22,14 @@ conda activate r4
 
 #All data
 #signed
-Rscript 05_WGCNA.r all TRUE
+#Rscript /mnt/beegfs/ek112884/mus_expression_analysis/MULTI_MAP/mus_spermatogenesis_analyses/WGCNA_scripts/05_WGCNA.r all TRUE
 #unsigned - NOT RECOMMENDED
 #Rscript 05_WGCNA.r all FALSE
 
 #Cell types separate
 #signed
-#Rscript 05_WGCNA.r LZ TRUE
-#Rscript 05_WGCNA.r RS TRUE
+#Rscript /mnt/beegfs/ek112884/mus_expression_analysis/MULTI_MAP/mus_spermatogenesis_analyses/WGCNA_scripts/05_WGCNA.r LZ TRUE
+Rscript /mnt/beegfs/ek112884/mus_expression_analysis/MULTI_MAP/mus_spermatogenesis_analyses/WGCNA_scripts/05_WGCNA.r RS TRUE
 #unsigned
 #Rscript 05_WGCNA.r LZ FALSE
 #Rscript 05_WGCNA.r RS FALSE

@@ -13,22 +13,27 @@
 ##SBATCH --mem=0 #Not sure if I should mess with these...
 # Partition:
 ## Since you want to run it on 72 cores, the partition good_cpu has nodes with 72 cores.
-#SBATCH --partition=good_lab_cpu
+#SBATCH --partition=good_lab_reincarnation
 ##SBATCH -w, --nodelist=compute-0-3 # run on a specific node
 #
 ## Command(s) to run:
+source ~/software/anaconda/anaconda3/bin/activate
+conda activate ek_main_enviro
 
 #Multimap, each read counted every time it maps (featurecounts -M)
-#exp="/mnt/beegfs/ek112884/mus_expression_analysis/MULTI_MAP/EVE_EXPRESSION_INPUTS/eve_expression_input_LZ_edgeR_wholeGenome.ensemblOrthos.rpkm2.txt"
+	#Induced genes only
+exp="/mnt/beegfs/ek112884/mus_expression_analysis/MULTI_MAP/INDUCED_CUTOFF2/eve_expression_input_LZinduced_edgeR_wholeGenome.ensemblOrthos.rpkm1.txt"
+	#All expressed genes
+#exp="/mnt/beegfs/ek112884/mus_expression_analysis/MULTI_MAP/EVE_EXPRESSION_INPUTS/eve_expression_input_LZ_edgeR_wholeGenome.ensemblOrthos.rpkm5.txt"
 #Multimap fractional
-exp="/mnt/beegfs/ek112884/mus_expression_analysis/WHOLE_GENOME_MULTIMAP_FRACTIONAL/EVE_EXPRESSION_INPUTS/eve_expression_input_RS_edgeR_wholeGenome.ensemblOrthos.rpkm1.txt"
+#exp="/mnt/beegfs/ek112884/mus_expression_analysis/WHOLE_GENOME_MULTIMAP_FRACTIONAL/INDUCED_CUTOFF5/eve_expression_input_LZinduced_edgeR_wholeGenome.ensemblOrthos.rpkm1.txt"
 #No multimapping
-#exp="/mnt/beegfs/ek112884/mus_expression_analysis/WHOLE_GENOME_NO_MULTIMAP/EVE_EXPRESSION_INPUTS/eve_expression_input_RS_edgeR_wholeGenome.ensemblOrthos.rpkm1.txt"
+#exp="/mnt/beegfs/ek112884/mus_expression_analysis/WHOLE_GENOME_NO_MULTIMAP/EVE_EXPRESSION_INPUTS/eve_expression_input_LZ_edgeR_wholeGenome.ensemblOrthos.rpkm1.txt"
 indiv="/mnt/beegfs/ek112884/mus_expression_analysis/eve_nindiv_input_four_species.txt"
 tree="/mnt/beegfs/ek112884/mus_expression_analysis/eve_input_four_species.treefile"
 ngene=$(head -1 ${exp})
-run_name="RSexpressed_RPKM1"
-subdir="RPKM1/"
+run_name="LZinduced2_RPKM1"
+subdir="RPKM1_INDUCED2/"
 
 echo "Running EVE command: /home/ek112884/software/EVE_release/EVEmodel -S -d ${exp} -i ${indiv} -t ${tree} -n ${ngene} -v 10 -f ${run_name} -p ${subdir}"
 
