@@ -83,13 +83,13 @@ KME_wDnds<-as.data.frame(cbind(dnds_sorted, myKME_filtered))
 print(head(KME_wDnds))
 
 pdf(paste("/mnt/beegfs/ek112884/mus_expression_analysis/MULTI_MAP/WGCNA/gene_eigenvaluesVSdnds",dataset,"pdf", sep="."), onefile=TRUE)
-spearman.ps<-c()
+pearson.ps<-c()
 for(m in interesting_mods){
         print(paste("Working on module", m))
-        print("Spearman's rank correlation test:")
-        result<-cor.test(as.numeric(as.character(KME_wDnds[,"dN.dS"])), as.numeric(as.character(KME_wDnds[,m])), method="spearman")
+        print("Pearson's correlation test:")
+        result<-cor.test(as.numeric(as.character(KME_wDnds[,"dN.dS"])), as.numeric(as.character(KME_wDnds[,m])), method="pearson")
         print(result)
-        spearman.ps<-c(spearman.ps, result$p.value)
+        pearson.ps<-c(pearson.ps, result$p.value)
         temp_df<-as.data.frame(KME_wDnds[, c("dN.dS",m)])
         colnames(temp_df)<-c("dN.dS","mod_eig")
         p<-ggplot(temp_df, aes(x=as.numeric(as.character(dN.dS)), y=as.numeric(as.character(mod_eig)))) + geom_point()
@@ -100,7 +100,7 @@ for(m in interesting_mods){
 }
 dev.off()
 
-print("FDR-corrected p-values from Spearman's rank correlation tests, dN/dS:")
-cor.ps<-p.adjust(spearman.ps, method="fdr")
+print("FDR-corrected p-values from Pearson's correlation tests, dN/dS:")
+cor.ps<-p.adjust(pearson.ps, method="fdr")
 names(cor.ps)<-interesting_mods
 print(cor.ps)
